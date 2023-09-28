@@ -1,6 +1,7 @@
 package exercise.article;
 
 import exercise.worker.WorkerImpl;
+import lombok.extern.java.Log;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,6 +20,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 
+@Log
 @DisplayName("Тестирование реализации класса WorkerImpl")
 class WorkerImplTest {
 
@@ -220,7 +222,7 @@ class WorkerImplTest {
         worker.getCatalog();
         verify(library).getAllTitles();
         assertEquals(result, worker.getCatalog());
-        System.out.println("Тест " + "\"" + name + "\"" + " - успешно пройден.\n");
+        log.info("Тест " + "\"" + name + "\"" + " - успешно пройден.\n");
     }
 
     @DisplayName("2. Тестирование метода prepareArticles")
@@ -229,7 +231,7 @@ class WorkerImplTest {
     public void prepareArticles_shouldDiscardArticleWithEmptyFields(List<Article> articles, List<Article> result,
                                                                     String name) {
         assertEquals(worker.prepareArticles(articles), result);
-        System.out.println("Тест " + "\"" + name + "\"" + " - успешно пройден.\n");
+        log.info("Тест " + "\"" + name + "\"" + " - успешно пройден.\n");
     }
 
     @DisplayName("3. Тестирование метода addNewArticles")
@@ -239,7 +241,7 @@ class WorkerImplTest {
                                                                           String name) {
         worker.addNewArticles(articlesForAdding);
         verifyNoInteractions(library);
-        System.out.println("Тест " + "\"" + name + "\"" + " - успешно пройден.\n");
+        log.info("Тест " + "\"" + name + "\"" + " - успешно пройден.\n");
     }
 
     @DisplayName("3. Тестирование метода addNewArticles")
@@ -249,6 +251,6 @@ class WorkerImplTest {
         worker.addNewArticles(articlesForAdding);
         verify(library).store(any(Integer.class), any());
         verify(library).updateCatalog();
-        System.out.println("Тест " + "\"" + name + "\"" + " - успешно пройден.\n");
+        log.info("Тест " + "\"" + name + "\"" + " - успешно пройден.\n");
     }
 }
